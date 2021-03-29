@@ -18,14 +18,6 @@ class City(db.Model):
 
 db.create_all()
 
-'''
-db.create_all()
-city_weather = City(name='London')
-db.session.add(city_weather)
-db.session.commit()
-City.query.all()
-'''
-
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
@@ -39,7 +31,7 @@ def index():
         cities = City.query.all()
         cities_names = [city.name for city in cities]
 
-        # checks if user input is valid name of existing city
+        # check if user input is valid name of existing city
         # or if typed city name has been already searched before.
         if str(context['cod'])[0] == '4':
             flash("The city doesn't exist!")
@@ -76,7 +68,6 @@ def delete(city_name):
         return redirect('/')
 
 
-# don't change the following way to run flask:
 if __name__ == '__main__':
     if len(sys.argv) > 1:
         arg_host, arg_port = sys.argv[1].split(':')
